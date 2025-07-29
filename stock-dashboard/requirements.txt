@@ -5,3 +5,4 @@ yfinance
 lightgbm
 matplotlib
 plotly
+scikit-learn
