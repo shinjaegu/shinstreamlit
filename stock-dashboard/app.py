@@ -179,7 +179,7 @@ render_header(f"{ticker} 분석 리포트", ICON_ANALYSIS)
 try:
     with st.spinner("데이터를 다운로드하고 AI 모델을 분석 중입니다. 잠시만 기다려주세요..."):
         end_date = date.today()
-        train_start_date = end_date - timedelta(days=7*365)
+        train_start_date = end_date - timedelta(days=3*365)
         result_df, plot_fig = run_prediction_pipeline(ticker, train_start_date, end_date)
         strategy_metrics, buy_hold_metrics, chimp_metrics, asset_df = calculate_strategy_performance(result_df, st.session_state.initial_investment)
 
