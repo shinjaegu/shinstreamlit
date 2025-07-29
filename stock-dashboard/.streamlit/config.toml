@@ -1,0 +1,13 @@
+[theme]
+primaryColor="#5a9aff"
+backgroundColor="#0f1116"
+secondaryBackgroundColor="#1c202a"
+textColor="#fafafa"
+font="sans serif"
+
+[server]
+runOnSave = true
+
+# 아래 섹션을 파일 하단에 추가하세요.
+[client]
+showDeployButton = false
