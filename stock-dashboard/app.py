@@ -71,7 +71,7 @@ for stock in STOCKS_DATA:
 # --- 3. UI 상태 초기화 및 컨트롤 렌더링 함수 ---
 
 if 'search_term' not in st.session_state:
-    st.session_state.search_term = 'Apple'
+    st.session_state.search_term = 'Tesla'
 if 'initial_investment' not in st.session_state:
     st.session_state.initial_investment = 10000
 
