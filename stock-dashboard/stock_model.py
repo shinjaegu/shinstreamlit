@@ -38,7 +38,7 @@ def train_and_predict(train_df, test_df):
     clean_target = clean_name('Target')
     X_train, y_train = train_df_cleaned[clean_features], train_df_cleaned[clean_target]
     X_test = test_df_cleaned[clean_features]
-    model = LGBMRegressor(n_estimators=1000, learning_rate=0.01, num_leaves=31, random_state=42, n_jobs=-1, verbose=-1)
+    model = LGBMRegressor(n_estimators=200, learning_rate=0.01, num_leaves=31, random_state=42, n_jobs=-1, verbose=-1)
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
     result_df = test_df.copy()
@@ -57,12 +57,12 @@ def plot_predictions(result_df):
     fig, ax = plt.subplots(figsize=(14, 7), facecolor=BG_COLOR)
     ax.set_facecolor(PLOT_BG_COLOR)
 
-    ax.plot(result_df.index, result_df['Close'], label='실제 종가', color=SECONDARY_COLOR, alpha=0.9, linewidth=2)
-    ax.plot(result_df.index, result_df['Predicted_Close'], label='AI 예측 종가', color=PRIMARY_COLOR, linestyle='--', alpha=0.9, linewidth=2)
+    ax.plot(result_df.index, result_df['Close'], label='actual closing price', color=SECONDARY_COLOR, alpha=0.9, linewidth=2)
+    ax.plot(result_df.index, result_df['Predicted_Close'], label='AI predicted closing price', color=PRIMARY_COLOR, linestyle='--', alpha=0.9, linewidth=2)
 
-    ax.set_title("실제 종가 vs. AI 예측 종가 (최근 1년)", fontsize=16, color=TEXT_COLOR, pad=20, weight='bold')
-    ax.set_xlabel("날짜", fontsize=12, color=TEXT_COLOR)
-    ax.set_ylabel("주가 ($)", fontsize=12, color=TEXT_COLOR)
+    ax.set_title("Actual closing price vs. AI predicted closing price (last 1 year)", fontsize=16, color=TEXT_COLOR, pad=20, weight='bold')
+    ax.set_xlabel("Date", fontsize=12, color=TEXT_COLOR)
+    ax.set_ylabel("Price ($)", fontsize=12, color=TEXT_COLOR)
     ax.tick_params(axis='x', colors=TEXT_COLOR); ax.tick_params(axis='y', colors=TEXT_COLOR)
     for spine in ax.spines.values(): spine.set_edgecolor(GRID_COLOR)
     
