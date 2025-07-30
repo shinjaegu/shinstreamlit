@@ -179,7 +179,7 @@ render_header(f"{ticker} 분석 리포트", ICON_ANALYSIS)
 try:
     with st.spinner("데이터를 다운로드하고 AI 모델을 분석 중입니다. 잠시만 기다려주세요..."):
         end_date = date.today()
-        train_start_date = end_date - timedelta(days=3*365)
+        train_start_date = end_date - timedelta(days=7*365)
         result_df, plot_fig = run_prediction_pipeline(ticker, train_start_date, end_date)
         strategy_metrics, buy_hold_metrics, chimp_metrics, asset_df = calculate_strategy_performance(result_df, st.session_state.initial_investment)
 
@@ -196,14 +196,14 @@ try:
         with col2:
             st.metric(label="단순 보유 전략", value=f"${buy_hold_metrics['Final Value']:,.2f}", delta=f"{buy_hold_metrics['Total Return'] * 100:.2f}% 총 수익률")
         with col3:
-            st.metric(label="침팬치 전략 (동전 던기기)", value=f"${chimp_metrics['Final Value']:,.2f}", delta=f"{chimp_metrics['Total Return'] * 100:.2f}% 총 수익률")
+            st.metric(label="침팬치 전략 (동전 던지기)", value=f"${chimp_metrics['Final Value']:,.2f}", delta=f"{chimp_metrics['Total Return'] * 100:.2f}% 총 수익률")
 
         st.markdown("<h5 class='section-title'>주요 성과 지표 (KPI)</h5>", unsafe_allow_html=True)
         metrics_data = {
             '지표': ['최종 자산', '총 수익률', '연평균 수익률(CAGR)', '최대 낙폭(MDD)'],
             'AI 예측 전략': [ f"${strategy_metrics['Final Value']:,.2f}", f"{strategy_metrics['Total Return'] * 100:,.2f}%", f"{strategy_metrics['CAGR'] * 100:,.2f}%", f"{strategy_metrics['MDD'] * 100:,.2f}%" ],
             '단순 보유 전략': [ f"${buy_hold_metrics['Final Value']:,.2f}", f"${buy_hold_metrics['Total Return'] * 100:,.2f}%", f"{buy_hold_metrics['CAGR'] * 100:,.2f}%", f"{buy_hold_metrics['MDD'] * 100:,.2f}%" ],
-            '침팬치 전략 (동전 던기기)': [ f"${chimp_metrics['Final Value']:,.2f}", f"{chimp_metrics['Total Return'] * 100:,.2f}%", f"{chimp_metrics['CAGR'] * 100:,.2f}%", f"{chimp_metrics['MDD'] * 100:,.2f}%" ]
+            '침팬치 전략 (동전 던지기)': [ f"${chimp_metrics['Final Value']:,.2f}", f"{chimp_metrics['Total Return'] * 100:,.2f}%", f"{chimp_metrics['CAGR'] * 100:,.2f}%", f"{chimp_metrics['MDD'] * 100:,.2f}%" ]
         }
         st.table(pd.DataFrame(metrics_data).set_index('지표'))
 
@@ -234,7 +234,7 @@ try:
                 '연도-월': monthly_asset_df.index.strftime('%Y-%m'),
                 'AI 예측 전략': monthly_asset_df['예측 전략'],
                 '단순 보유 전략': monthly_asset_df['단순 보유 전략'],
-                '침팬치 전략 (동전 던기기)': monthly_asset_df['침팬치 전략'],
+                '침팬치 전략 (동전 던지기)': monthly_asset_df['침팬치 전략'],
                 '차이 (AI vs 보유)': monthly_asset_df['차이 (AI vs 보유)']
             })
 

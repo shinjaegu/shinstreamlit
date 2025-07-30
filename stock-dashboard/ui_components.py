@@ -38,14 +38,26 @@ ICON_WARNING = """
 """
 
 
+# def render_main_logo():
+#     """사이드바 로고 렌더링"""
+#     st.markdown(f"""
+#     <div class="logo-container">
+#         <span class="logo-svg">{ICON_LOGO_UPGRADED}</span>
+#         <span class="logo-text">투자침팬치</span>
+#     </div>
+#     """, unsafe_allow_html=True)
+
 def render_main_logo():
     """사이드바 로고 렌더링"""
     st.markdown(f"""
     <div class="logo-container">
-        <span class="logo-svg">{ICON_LOGO_UPGRADED}</span>
-        <span class="logo-text">투자침팬치</span>
+        <a href="/" class="logo-link" style="display:flex; justify-content: center; align-items: center; text-decoration: none; gap: 10px; width: 100%;" target="_self">
+            <span class="logo-svg">{ICON_LOGO_UPGRADED}</span>
+            <span class="logo-text">투자침팬치</span>
+        </a>
     </div>
     """, unsafe_allow_html=True)
+
 
 def render_header(title, icon_svg):
     """아이콘이 포함된 섹션 헤더 렌더링"""
